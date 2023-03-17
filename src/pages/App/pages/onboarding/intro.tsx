@@ -37,7 +37,7 @@ const Intro = () => {
       >
         <CardContent>
           <Typography textAlign="center" variant="h3" gutterBottom>
-            Start your eth journey
+            WalletX
           </Typography>
           <Typography textAlign="center" variant="body1" color="text.secondary">
             Your smart contract account with unlimited possibilities,{' '}
