@@ -16,18 +16,15 @@ const Onboarding: OnboardingComponent = ({
     <Box sx={{ padding: 2 }}>
       <CardContent>
         <Typography variant="h3" gutterBottom>
-          Custmisable Account Component
+          You are all set!
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          You can show as many steps as you want in this dummy component. You
-          need to call the function <b>onOnboardingComplete</b> passed as a
-          props to this component. <br />
+          Before using your wallet, you have to deploy it with the features you
+          need!
           <br />
-          The function takes a context as a parameter, this context will be
-          passed to your AccountApi when creating a new account.
-          <br />
-          This Component is defined in exported in{' '}
-          <pre>trampoline/src/pages/Account/components/onboarding/index.ts</pre>
+          Once deployed, your smart contract wallet will be live with the
+          features you desire. Be it transaction limit, extra authentication,
+          the choice is yours!
         </Typography>
       </CardContent>
       <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
