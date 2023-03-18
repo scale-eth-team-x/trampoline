@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/lxieyang/chrome-extension-boilerplate-react.git"
   },
+  "_moduleAliases": {
+    "@": "build"
+  },
   "scripts": {
     "devtools": "npx redux-devtools --hostname=localhost --port=8000 --open",
     "build": "npx hardhat clean && npx hardhat compile && node utils/build.js",
@@ -22,6 +25,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@metamask/browser-passworder": "^4.0.2",
     "@mui/icons-material": "^5.11.0",
+    "@mui/lab": "^5.0.0-alpha.123",
     "@mui/material": "^5.11.6",
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
     "@peculiar/asn1-ecc": "^2.3.4",
@@ -38,6 +42,7 @@
     "ethers": "^5.7.2",
     "extensionizer": "^1.0.1",
     "magic-sdk": "^13.4.0",
+    "module-alias": "^2.2.2",
     "node-polyfill-webpack-plugin": "^2.0.1",
     "path-browserify": "^1.0.1",
     "react": "^18.2.0",
