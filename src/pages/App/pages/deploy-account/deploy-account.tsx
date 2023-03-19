@@ -234,12 +234,11 @@ const DeployAccount = () => {
           </Box>
         </Card>
       </Container>
-      {isFeaturePickerOpen && (
-        <FeaturePicker
-          onClose={() => setIsFeaturePickerOpen(false)}
-          onSubmit={handleFeaturePickerSubmit}
-        />
-      )}
+      <FeaturePicker
+        isOpen={isFeaturePickerOpen}
+        onClose={() => setIsFeaturePickerOpen(false)}
+        onSubmit={handleFeaturePickerSubmit}
+      />
     </>
   );
 };

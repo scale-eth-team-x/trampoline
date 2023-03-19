@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Grid,
   Link,
@@ -16,19 +15,33 @@ import { grey } from '@mui/material/colors';
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
 
-const FeaturePicker = ({ onClose, onSubmit }: FeaturePickerProps) => {
+const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
+  const [pickedFeatureIDs, setPickedFeatureIDs] = useState<Set<string>>(
+    new Set<string>()
+  );
+
+  const handleSelectFeature = (featureID: string) => {
+    const tempPickedFeatureIDs = new Set([...Array.from(pickedFeatureIDs)]);
+
+    if (tempPickedFeatureIDs.has(featureID))
+      tempPickedFeatureIDs.delete(featureID);
+    else tempPickedFeatureIDs.add(featureID);
+
+    setPickedFeatureIDs(tempPickedFeatureIDs);
+  };
+
   return (
     <Dialog
+      open={isOpen}
       sx={{
         '& .MuiDialog-container': {
           '& .MuiPaper-root': {
             width: '100%',
-            maxWidth: '500px', // Set your width here
+            maxWidth: '800px', // Set your width here
             height: '100%',
           },
         },
       }}
-      open={true}
       onClose={onClose}
     >
       <DialogTitle>Select features</DialogTitle>
@@ -47,28 +60,30 @@ const FeaturePicker = ({ onClose, onSubmit }: FeaturePickerProps) => {
           <Grid
             container
             rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 1 }}
+            columnSpacing={{ xs: 1, sm: 1, md: 1 }}
           >
             <Grid item xs={12} md={6}>
               <FeatureCard
-                onClick={() => {}}
-                title="hello"
-                description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, earum est ab quo ipsam itaque quos facere harum reprehenderit provident?"
+                onClick={() => handleSelectFeature('daily_limit')}
+                isSelected={pickedFeatureIDs.has('daily_limit')}
+                title="Daily Transaction Limit"
+                description="Limit your daily transactions to prevent overshoots"
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <FeatureCard
-                onClick={() => {}}
-                title="hello"
-                description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, earum est ab quo ipsam itaque quos facere harum reprehenderit provident?"
-                isSelected
+                onClick={() => handleSelectFeature('2fa')}
+                isSelected={pickedFeatureIDs.has('2fa')}
+                title="2FA Auth"
+                description="Secure your wallet with 2FA such as Google Auth or Polygon ID."
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <FeatureCard
-                onClick={() => {}}
-                title="hello"
-                description="Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor, earum est ab quo ipsam itaque quos facere harum reprehenderit provident?"
+                onClick={() => handleSelectFeature('usdt_gas')}
+                isSelected={pickedFeatureIDs.has('usdt_gas')}
+                title="USDT Gas"
+                description="Pay your gases using USDT instead of the chain defaults."
               />
             </Grid>
           </Grid>

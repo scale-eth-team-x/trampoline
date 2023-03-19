@@ -19,6 +19,7 @@ const FeatureCard = ({
         borderRadius: '4px',
         cursor: 'pointer',
       }}
+      onClick={onClick}
     >
       <Box
         sx={{
