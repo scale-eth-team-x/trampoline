@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
-  Dialog,
   DialogActions,
-  DialogContent,
-  DialogTitle,
   Grid,
   Link,
   Typography,
 } from '@mui/material';
-import { grey } from '@mui/material/colors';
 
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
@@ -39,15 +35,16 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
         Before using your wallet, you have to deploy it with the features you
         need!
         <br />
-        Once deployed, your smart contract wallet will be live with the
-        features you desire. Be it transaction limit, extra authentication,
-        the choice is yours!
+        Once deployed, your smart contract wallet will be live with the features
+        you desire. Be it transaction limit, extra authentication, the choice is
+        yours!
+        <br />
+      </Typography>
+      <Typography color="text.secondary">
+        If you are a developer & want to build your own feature, learn more{' '}
+        <Link>here</Link>
       </Typography>
       <div>
-        <Typography align="center" sx={{ margin: 1, color: grey[600] }}>
-          If you are a developer & want to build your own feature, learn more{' '}
-          <Link>here</Link>
-        </Typography>
         <Box
           sx={{
             width: '100%',
@@ -131,15 +128,9 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
           </Grid>
         </Box>
       </div>
-      <DialogActions>
-        {/* TODO: remove this */}
-        {/* <Button fullWidth onClick={() => { }}>
-          Cancel
-        </Button> */}
-        <Button fullWidth variant="contained" onClick={onSubmit}>
-          Submit
-        </Button>
-      </DialogActions>
+      <Button fullWidth variant="contained" onClick={onSubmit} sx={{ mt: 4 }}>
+        Submit
+      </Button>
     </>
   );
 };
