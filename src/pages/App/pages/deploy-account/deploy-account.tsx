@@ -204,14 +204,26 @@ const DeployAccount = () => {
                 <StepContent>
                   <Typography>
                     Initiate the deployment transaction, it may take some time
-                    for the transaction to be added to the blockchain.
+                    for the transaction to be added to the blockchain. If you
+                    still need to select some features, feel free to go back.
                   </Typography>
-                  <Box sx={{ mb: 2 }}>
+                  <Box
+                    sx={{
+                      mt: 2,
+                      mb: 2,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 1,
+                    }}
+                  >
+                    <Button variant="outlined" onClick={() => setActiveStep(1)}>
+                      Go back
+                    </Button>
                     <Button
                       disabled={deployLoader}
                       onClick={deployAcount}
                       variant="contained"
-                      sx={{ mt: 1, mr: 1, position: 'relative' }}
+                      sx={{ position: 'relative' }}
                     >
                       Deploy Account
                       {deployLoader && (
