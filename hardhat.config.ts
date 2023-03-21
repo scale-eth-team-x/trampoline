@@ -42,6 +42,9 @@ const config: HardhatUserConfig = {
   },
   networks: {
     goerli: getNetwork('goerli'),
+    hardhat: {
+      chainId: 1337
+    },
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,

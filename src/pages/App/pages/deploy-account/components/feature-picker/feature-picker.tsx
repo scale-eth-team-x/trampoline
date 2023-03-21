@@ -15,7 +15,7 @@ import { grey } from '@mui/material/colors';
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
 
-const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
+const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
   const [pickedFeatureIDs, setPickedFeatureIDs] = useState<Set<string>>(
     new Set<string>()
   );
@@ -31,19 +31,7 @@ const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      sx={{
-        '& .MuiDialog-container': {
-          '& .MuiPaper-root': {
-            width: '100%',
-            maxWidth: '800px', // Set your width here
-            height: '100%',
-          },
-        },
-      }}
-      onClose={onClose}
-    >
+    <>
       <DialogTitle>Select features</DialogTitle>
       <DialogContent>
         <Typography align="center" sx={{ margin: 1, color: grey[600] }}>
@@ -141,7 +129,7 @@ const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
           Submit
         </Button>
       </DialogActions>
-    </Dialog>
+    </>
   );
 };
 
