@@ -53,9 +53,53 @@ const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
         <Box
           sx={{
             width: '100%',
-            height: '100%',
+            mb: 4,
           }}
         >
+          {/* TODO: make this part interactive, depends on logic later */}
+          <Typography align="left" sx={{ mb: 2 }}>
+            Core Features by Wallet X (Verified)
+          </Typography>
+          <Grid
+            container
+            rowSpacing={1}
+            columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+          >
+            <Grid item xs={12} md={6}>
+              <FeatureCard
+                onClick={() => handleSelectFeature('daily_limit_cs')}
+                isSelected={pickedFeatureIDs.has('daily_limit_cs')}
+                title="Daily Transaction Limit"
+                description="Limit your daily transactions to prevent overshoots"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FeatureCard
+                onClick={() => handleSelectFeature('2fa_cs')}
+                isSelected={pickedFeatureIDs.has('2fa_cs')}
+                title="2FA Auth"
+                description="Secure your wallet with 2FA such as Google Auth or Polygon ID."
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <FeatureCard
+                onClick={() => handleSelectFeature('usdt_gas_cs')}
+                isSelected={pickedFeatureIDs.has('usdt_gas_cs')}
+                title="USDT Gas"
+                description="Pay your gases using USDT instead of the chain defaults."
+              />
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Box
+          sx={{
+            width: '100%',
+          }}
+        >
+          <Typography align="left" sx={{ mb: 2 }}>
+            Crowdsource contract wallet (on your own risk)
+          </Typography>
           {/* TODO: make this part interactive, depends on logic later */}
           <Grid
             container

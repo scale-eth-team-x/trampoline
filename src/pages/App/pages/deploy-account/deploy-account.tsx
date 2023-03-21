@@ -33,8 +33,11 @@ import {
   sendTransactionsRequest,
 } from '../../../Background/redux-slices/transactions';
 import FeaturePicker from './components/feature-picker';
+import { useNavigate } from 'react-router-dom';
 
 const DeployAccount = () => {
+  const navigate = useNavigate();
+
   const [activeStep, setActiveStep] = useState<number>(0);
   const [deployLoader, setDeployLoader] = useState<boolean>(false);
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
@@ -129,6 +132,8 @@ const DeployAccount = () => {
     }
 
     // await backgroundDispatch(sendTransaction(activeAccount));
+    setDeployLoader(false);
+    navigate('/');
   }, [backgroundDispatch, activeAccount]);
 
   // note that the core logic of the submission is handled within the feature picker component,
