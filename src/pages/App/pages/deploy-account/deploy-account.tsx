@@ -32,7 +32,7 @@ import {
   sendTransaction,
   sendTransactionsRequest,
 } from '../../../Background/redux-slices/transactions';
-import FeaturePicker from './components/feature-picker';
+import FeaturePicker from '../onboarding/components/feature-picker';
 import { useNavigate } from 'react-router-dom';
 
 const DeployAccount = () => {
@@ -185,24 +185,6 @@ const DeployAccount = () => {
                 </StepContent>
               </Step>
               <Step key={2}>
-                <StepLabel optional={null}>Pick your features</StepLabel>
-                <StepContent>
-                  <Typography>
-                    Add features that you want to use with your smart contract
-                    wallet.
-                  </Typography>
-                  <Box sx={{ mb: 2 }}>
-                    <Button
-                      onClick={() => setIsFeaturePickerOpen(true)}
-                      variant="contained"
-                      sx={{ mt: 1, mr: 1, position: 'relative' }}
-                    >
-                      Select features
-                    </Button>
-                  </Box>
-                </StepContent>
-              </Step>
-              <Step key={2}>
                 <StepLabel optional={null}>
                   Initiate Deploy Transaction
                 </StepLabel>
@@ -251,11 +233,6 @@ const DeployAccount = () => {
           </Box>
         </Card>
       </Container>
-      <FeaturePicker
-        isOpen={isFeaturePickerOpen}
-        onClose={() => setIsFeaturePickerOpen(false)}
-        onSubmit={handleFeaturePickerSubmit}
-      />
     </>
   );
 };

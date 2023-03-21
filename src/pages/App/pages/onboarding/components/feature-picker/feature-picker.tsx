@@ -32,8 +32,18 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
 
   return (
     <>
-      <DialogTitle>Select features</DialogTitle>
-      <DialogContent>
+      <Typography variant="h3" gutterBottom>
+        Customize your wallet
+      </Typography>
+      <Typography variant="body1" color="text.secondary">
+        Before using your wallet, you have to deploy it with the features you
+        need!
+        <br />
+        Once deployed, your smart contract wallet will be live with the
+        features you desire. Be it transaction limit, extra authentication,
+        the choice is yours!
+      </Typography>
+      <div>
         <Typography align="center" sx={{ margin: 1, color: grey[600] }}>
           If you are a developer & want to build your own feature, learn more{' '}
           <Link>here</Link>
@@ -120,11 +130,12 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             </Grid>
           </Grid>
         </Box>
-      </DialogContent>
+      </div>
       <DialogActions>
-        <Button fullWidth onClick={onClose}>
+        {/* TODO: remove this */}
+        {/* <Button fullWidth onClick={() => { }}>
           Cancel
-        </Button>
+        </Button> */}
         <Button fullWidth variant="contained" onClick={onSubmit}>
           Submit
         </Button>
