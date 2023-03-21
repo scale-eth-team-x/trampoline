@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import {
   Box,
   Button,
-  Dialog,
   DialogActions,
-  DialogContent,
-  DialogTitle,
   Grid,
   Link,
   Typography,
 } from '@mui/material';
-import { grey } from '@mui/material/colors';
 
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
 
-const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
+const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
   const [pickedFeatureIDs, setPickedFeatureIDs] = useState<Set<string>>(
     new Set<string>()
   );
@@ -31,25 +27,24 @@ const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      sx={{
-        '& .MuiDialog-container': {
-          '& .MuiPaper-root': {
-            width: '100%',
-            maxWidth: '800px', // Set your width here
-            height: '100%',
-          },
-        },
-      }}
-      onClose={onClose}
-    >
-      <DialogTitle>Select features</DialogTitle>
-      <DialogContent>
-        <Typography align="center" sx={{ margin: 1, color: grey[600] }}>
-          If you are a developer & want to build your own feature, learn more{' '}
-          <Link>here</Link>
-        </Typography>
+    <>
+      <Typography variant="h3" gutterBottom>
+        Customize your wallet
+      </Typography>
+      <Typography variant="body1" color="text.secondary">
+        Before using your wallet, you have to deploy it with the features you
+        need!
+        <br />
+        Once deployed, your smart contract wallet will be live with the features
+        you desire. Be it transaction limit, extra authentication, the choice is
+        yours!
+        <br />
+      </Typography>
+      <Typography color="text.secondary">
+        If you are a developer & want to build your own feature, learn more{' '}
+        <Link>here</Link>
+      </Typography>
+      <div>
         <Box
           sx={{
             width: '100%',
@@ -132,16 +127,11 @@ const FeaturePicker = ({ isOpen, onClose, onSubmit }: FeaturePickerProps) => {
             </Grid>
           </Grid>
         </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button fullWidth onClick={onClose}>
-          Cancel
-        </Button>
-        <Button fullWidth variant="contained" onClick={onSubmit}>
-          Submit
-        </Button>
-      </DialogActions>
-    </Dialog>
+      </div>
+      <Button fullWidth variant="contained" onClick={onSubmit} sx={{ mt: 4 }}>
+        Submit
+      </Button>
+    </>
   );
 };
 

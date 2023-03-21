@@ -32,17 +32,15 @@ import {
   sendTransaction,
   sendTransactionsRequest,
 } from '../../../Background/redux-slices/transactions';
-import FeaturePicker from './components/feature-picker';
 import { useNavigate } from 'react-router-dom';
+import { STEP_DEPLOY, STEP_SEND_FUNDS } from './deploy-account.constants';
 
 const DeployAccount = () => {
   const navigate = useNavigate();
 
-  const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(STEP_SEND_FUNDS);
   const [deployLoader, setDeployLoader] = useState<boolean>(false);
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
-  const [isFeaturePickerOpen, setIsFeaturePickerOpen] =
-    useState<boolean>(false);
 
   const activeAccount = useBackgroundSelector(getActiveAccount);
   const activeNetwork = useBackgroundSelector(getActiveNetwork);
@@ -136,13 +134,6 @@ const DeployAccount = () => {
     navigate('/');
   }, [backgroundDispatch, activeAccount]);
 
-  // note that the core logic of the submission is handled within the feature picker component,
-  // this part just closes the modal and moves the step
-  const handleFeaturePickerSubmit = () => {
-    setIsFeaturePickerOpen(false);
-    setActiveStep(2);
-  };
-
   return (
     <>
       <Container sx={{ width: '62vw', height: '100vh' }}>
@@ -160,7 +151,7 @@ const DeployAccount = () => {
           <Box sx={{ m: 4 }}>
             <Typography variant="h6">Perform the following steps:</Typography>
             <Stepper activeStep={activeStep} orientation="vertical">
-              <Step key={0}>
+              <Step key={STEP_SEND_FUNDS}>
                 <StepLabel optional={null}>Transfer Funds</StepLabel>
                 <StepContent>
                   <Typography>
@@ -184,25 +175,7 @@ const DeployAccount = () => {
                   </Box>
                 </StepContent>
               </Step>
-              <Step key={2}>
-                <StepLabel optional={null}>Pick your features</StepLabel>
-                <StepContent>
-                  <Typography>
-                    Add features that you want to use with your smart contract
-                    wallet.
-                  </Typography>
-                  <Box sx={{ mb: 2 }}>
-                    <Button
-                      onClick={() => setIsFeaturePickerOpen(true)}
-                      variant="contained"
-                      sx={{ mt: 1, mr: 1, position: 'relative' }}
-                    >
-                      Select features
-                    </Button>
-                  </Box>
-                </StepContent>
-              </Step>
-              <Step key={2}>
+              <Step key={STEP_DEPLOY}>
                 <StepLabel optional={null}>
                   Initiate Deploy Transaction
                 </StepLabel>
@@ -221,9 +194,6 @@ const DeployAccount = () => {
                       gap: 1,
                     }}
                   >
-                    <Button variant="outlined" onClick={() => setActiveStep(1)}>
-                      Go back
-                    </Button>
                     <Button
                       disabled={deployLoader}
                       onClick={deployAcount}
@@ -251,11 +221,6 @@ const DeployAccount = () => {
           </Box>
         </Card>
       </Container>
-      <FeaturePicker
-        isOpen={isFeaturePickerOpen}
-        onClose={() => setIsFeaturePickerOpen(false)}
-        onSubmit={handleFeaturePickerSubmit}
-      />
     </>
   );
 };
