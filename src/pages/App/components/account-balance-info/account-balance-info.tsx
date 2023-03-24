@@ -27,6 +27,14 @@ const AccountBalanceInfo = ({ address }: { address: string }) => {
   const backgroundDispatch = useBackgroundDispatch();
 
   useEffect(() => {
+    if (accountData !== 'loading' && !walletDeployed) {
+      navigate('/deploy-account');
+    } else if (walletDeployed) {
+      navigate('/');
+    }
+  }, [walletDeployed, accountData, navigate]);
+
+  useEffect(() => {
     backgroundDispatch(getAccountData(address));
   }, [backgroundDispatch, address]);
 

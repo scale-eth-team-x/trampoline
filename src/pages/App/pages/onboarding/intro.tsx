@@ -37,11 +37,11 @@ const Intro = () => {
       >
         <CardContent>
           <Typography textAlign="center" variant="h3" gutterBottom>
-            Start your eth journey
+            WalletX
           </Typography>
           <Typography textAlign="center" variant="body1" color="text.secondary">
-            Your smart contract account with unlimited possibilities,{' '}
-            <Link>learn more</Link>
+            Your modularized smart contract account with unlimited
+            possibilities, <Link>learn more</Link>
           </Typography>
           <Box
             display="flex"
@@ -67,7 +67,7 @@ const Intro = () => {
               variant="contained"
               onClick={() => navigate('/accounts/new')}
             >
-              Create/recover new account
+              Create new account
             </Button>
           </Stack>
         </CardActions>

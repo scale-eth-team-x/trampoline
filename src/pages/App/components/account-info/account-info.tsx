@@ -7,10 +7,10 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const AccountInfo = ({
   address,
-  showOptions = true,
+  showOptions = false,
 }: {
   address: string;
-  showOptions: boolean;
+  showOptions?: boolean;
 }) => {
   const [tooltipMessage, setTooltipMessage] = useState<string>('Copy address');
 
