@@ -26,6 +26,15 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
     setPickedFeatureIDs(tempPickedFeatureIDs);
   };
 
+  // hardcoded feature selection
+  const handleSubmit = () => {
+    let args = '';
+    if (pickedFeatureIDs.size === 2) args = 'spendLimitAndSocialRecovery';
+    else args = pickedFeatureIDs[0];
+
+    onSubmit(args);
+  };
+
   return (
     <>
       <Typography variant="h3" gutterBottom>
@@ -62,32 +71,24 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
           >
             <Grid item xs={12} md={6}>
               <FeatureCard
-                onClick={() => handleSelectFeature('daily_limit_cs')}
-                isSelected={pickedFeatureIDs.has('daily_limit_cs')}
-                title="Daily Transaction Limit"
-                description="Limit your daily transactions to prevent overshoots"
+                onClick={() => handleSelectFeature('spendLimit')}
+                isSelected={pickedFeatureIDs.has('spendLimit')}
+                title="Spending Limit"
+                description="Limit your transactions to prevent overshoots"
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <FeatureCard
-                onClick={() => handleSelectFeature('2fa_cs')}
-                isSelected={pickedFeatureIDs.has('2fa_cs')}
-                title="2FA Auth"
-                description="Secure your wallet with 2FA such as Google Auth or Polygon ID."
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('usdt_gas_cs')}
-                isSelected={pickedFeatureIDs.has('usdt_gas_cs')}
-                title="USDT Gas"
-                description="Pay your gases using USDT instead of the chain defaults."
+                onClick={() => handleSelectFeature('socialRecovery')}
+                isSelected={pickedFeatureIDs.has('socialRecovery')}
+                title="Social Recovery"
+                description="Make your wallet recoverable by people you trust"
               />
             </Grid>
           </Grid>
         </Box>
 
-        <Box
+        {/* <Box
           sx={{
             width: '100%',
           }}
@@ -95,7 +96,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
           <Typography align="left" sx={{ mb: 2 }}>
             Crowdsource contract wallet (on your own risk)
           </Typography>
-          {/* TODO: make this part interactive, depends on logic later */}
+
           <Grid
             container
             rowSpacing={1}
@@ -126,9 +127,15 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
               />
             </Grid>
           </Grid>
-        </Box>
+        </Box> */}
       </div>
-      <Button fullWidth variant="contained" onClick={onSubmit} sx={{ mt: 4 }}>
+      <Button
+        fullWidth
+        variant="contained"
+        onClick={handleSubmit}
+        sx={{ mt: 4 }}
+        disabled={pickedFeatureIDs.size < 1}
+      >
         Submit
       </Button>
     </>

@@ -3,7 +3,9 @@ import { TabPanel, TabContext } from '@mui/lab';
 import React, { useState } from 'react';
 
 const AccountActivity = () => {
-  const [activeTab, setActiveTab] = useState<'assets' | 'activity'>('assets');
+  const [activeTab, setActiveTab] = useState<
+    'assets' | 'activity' | 'settings'
+  >('assets');
 
   return (
     <>

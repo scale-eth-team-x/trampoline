@@ -1,3 +1,3 @@
 export interface FeaturePickerProps {
-  onSubmit: () => void;
+  onSubmit: (feature: string) => void;
 }
