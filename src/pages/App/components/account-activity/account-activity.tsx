@@ -1,4 +1,4 @@
-import { Box, Button, Tab, Tabs, TextField, Typography } from '@mui/material';
+import { Box, Button, Divider, Tab, Tabs, TextField, Typography } from '@mui/material';
 import { TabPanel, TabContext } from '@mui/lab';
 import React, { useEffect, useState } from 'react';
 import { getActiveAccount } from '../../../../pages/Background/redux-slices/selectors/accountSelectors';
@@ -12,7 +12,9 @@ const AccountActivity = ({ address }: { address: string }) => {
   const [activeTab, setActiveTab] = useState<
     'assets' | 'activity' | 'settings'
   >('assets');
-  const [spendingLimit, setSpendingLimit] = useState<number | undefined>(undefined);
+  const [spendingLimit, setSpendingLimit] = useState<number>(0);
+  const [activateSpendingLimit, setActivateSpendingLimit] = useState<boolean>(false);
+  const [guardian, setGuardian] = useState<string | undefined>('');
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -21,6 +23,11 @@ const AccountActivity = ({ address }: { address: string }) => {
     address: address,
     abi: ContractABI,
     functionName: 'getLimit',
+  })
+  const { data: guardianAddress } = useContractRead({
+    address: address,
+    abi: ContractABI,
+    functionName: 'guardian',
   })
   const contract = useContract({
     address: address,
@@ -37,14 +44,23 @@ const AccountActivity = ({ address }: { address: string }) => {
   // }, [address])
 
   const enableSpendingLimit = async () => {
-
-    return await contract?.enableSpendLimit();
+    await contract?.enableSpendLimit();
+    await setActivateSpendingLimit(true)
   }
   const callSetSpendingLimit = async (limit: number) => {
-    const data = await contract?.setSpendingLimit(limit);
-    console.log("callSetSpendingLimitData: ", data);
-    setSpendingLimit(limit);
-    return data
+    const spendingLimitData = await contract?.setSpendingLimit(limit);
+    console.log("limit: ", limit);
+    console.log("callSetSpendingLimitData: ", spendingLimitData);
+  }
+  const callSetGuardian = async () => {
+    return await contract?.setGuardian(guardian);
+  }
+  const callSetupRecovery = async () => {
+    await contract?.initRecovery(address);
+    console.log("end init")
+    setTimeout(() => { }, 3600);
+    await contract?.executeRecovery();
+    console.log("execute recovery")
   }
 
   return (
@@ -66,38 +82,62 @@ const AccountActivity = ({ address }: { address: string }) => {
           <TabPanel value="assets">assets</TabPanel>
           <TabPanel value="activity">activity</TabPanel>
           <TabPanel value="settings">
-            <Typography variant="h5" gutterBottom>
-              Daily Spending Limit
-            </Typography>
-            {
-              spendingLimit ? (
-                <>
-                  <TextField
-                    required
-                    id="spending limit"
-                    type="number"
-                    value={spendingLimit}
-                    defaultValue="Hello World"
-                  />
-                  <Button variant="contained">Update</Button></>
-              ) : (
-                <>
-                  <Button variant="contained" onClick={async () => await enableSpendingLimit()}>Activate Spending Limit</Button>
-                </>
-              )
-            }
             <>
-              <Button variant="contained" onClick={async () => await callSetSpendingLimit(1)}>Set Spending Limit</Button>
+              {
+                data && (
+                  <Box sx={{ my: 3, mx: 2 }}>
+                    <Typography variant="h5" gutterBottom>
+                      Daily Spending Limit
+                    </Typography>
+                    <Box>
+                      {
+                        activateSpendingLimit ? (
+                          <>
+                            <TextField
+                              id="spending limit"
+                              type="number"
+                              defaultValue={spendingLimit}
+                              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                setSpendingLimit(event.target.value);
+                              }}
+                            />
+                            <Button variant="contained" onClick={async () => await callSetSpendingLimit(spendingLimit)}>Set Spending Limit</Button>
+                          </>
+                        ) : (
+                          <>
+                            <Button variant="contained" onClick={async () => await enableSpendingLimit()}>Activate Spending Limit</Button>
+                          </>
+                        )
+                      }
+                    </Box>
+                  </Box>
+                )
+              }
+
+              <Divider variant="middle" />
+              {
+                guardianAddress && (
+                  <Box sx={{ my: 3, mx: 2 }}>
+                    <Typography variant="h5" gutterBottom>
+                      Social Recovery
+                    </Typography>
+                    <TextField
+                      id="guardian"
+                      label="Required"
+                      defaultValue={guardianAddress}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setGuardian(event.target.value);
+                      }}
+                    />
+                    <Button variant="contained" onClick={async () => await callSetGuardian()}>Set Guardian</Button>
+                    <Typography variant="h5" gutterBottom>
+                      Recover Accounts
+                    </Typography>
+                    <Button variant="contained" onClick={async () => await callSetupRecovery()}>Perform Recovery</Button>
+                  </Box>
+                )
+              }
             </>
-            <Typography variant="h5" gutterBottom>
-              Social Recovery
-            </Typography>
-            <TextField
-              required
-              id="outlined-required"
-              label="Required"
-              defaultValue="Hello World"
-            />
           </TabPanel>
         </Box>
       </TabContext>
