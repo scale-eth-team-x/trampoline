@@ -38,9 +38,9 @@ class SimpleAccountAPI extends AccountApiType {
 
   factory?: SimpleAccountFactory;
 
-  constructor(params: AccountApiParamsType<{ feature: string }>) {
+  constructor(params: AccountApiParamsType<{ factoryAddress: string }>) {
     super(params);
-    this.factoryAddress = featureConfig[params.context?.feature || ''].factory;
+    this.factoryAddress = params.context?.factoryAddress;
 
     this.owner = params.deserializeState?.privateKey
       ? new ethers.Wallet(params.deserializeState?.privateKey)

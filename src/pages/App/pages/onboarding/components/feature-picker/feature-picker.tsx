@@ -10,32 +10,34 @@ import {
 
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
+import featureConfig from '../../../../../../feature-config.json';
 import useGetAllFactories from '../../../../hooks/factory-aggregator/use-get-all-factories';
 
 const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
-  const [pickedFeatureIDs, setPickedFeatureIDs] = useState<Set<string>>(
+  const [factoryAddresses, setFactoryAddresses] = useState<Set<string>>(
     new Set<string>()
   );
 
   const { data, loading, error } = useGetAllFactories();
 
   const handleSelectFeature = (featureID: string) => {
-    const tempPickedFeatureIDs = new Set([...Array.from(pickedFeatureIDs)]);
+    const tempFactoryAddresses = new Set([...Array.from(factoryAddresses)]);
 
-    if (tempPickedFeatureIDs.has(featureID))
-      tempPickedFeatureIDs.delete(featureID);
-    else tempPickedFeatureIDs.add(featureID);
+    if (tempFactoryAddresses.has(featureID))
+      tempFactoryAddresses.delete(featureID);
+    else tempFactoryAddresses.add(featureID);
 
-    setPickedFeatureIDs(tempPickedFeatureIDs);
+    setFactoryAddresses(tempFactoryAddresses);
   };
 
   // hardcoded feature selection
   const handleSubmit = () => {
-    let args = '';
-    if (pickedFeatureIDs.size === 2) args = 'spendLimitAndSocialRecovery';
-    else args = Array.from(pickedFeatureIDs)[0];
+    let selectedAddress = '';
+    if (factoryAddresses.size === 2)
+      selectedAddress = featureConfig.spendLimitAndSocialRecovery.factory;
+    else selectedAddress = Array.from(factoryAddresses)[0];
 
-    onSubmit(args);
+    onSubmit(selectedAddress);
   };
 
   return (
@@ -72,12 +74,23 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 1, md: 1 }}
           >
-            {data.length === 2 && (
+            {data.map((item) => (
+              <Grid key={item.factoryAddress} item xs={12} md={6}>
+                <FeatureCard
+                  onClick={() => handleSelectFeature(item.factoryAddress)}
+                  isSelected={factoryAddresses.has(item.factoryAddress)}
+                  title={item.factoryName}
+                  description={item.factoryDescription}
+                />
+              </Grid>
+            ))}
+
+            {/* {data.length === 2 && (
               <>
                 <Grid item xs={12} md={6}>
                   <FeatureCard
                     onClick={() => handleSelectFeature('spendLimit')}
-                    isSelected={pickedFeatureIDs.has('spendLimit')}
+                    isSelected={factoryAddresses.has('spendLimit')}
                     title={data[0].factoryName}
                     description={data[0].factoryDescription}
                   />
@@ -85,13 +98,13 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
                 <Grid item xs={12} md={6}>
                   <FeatureCard
                     onClick={() => handleSelectFeature('socialRecovery')}
-                    isSelected={pickedFeatureIDs.has('socialRecovery')}
+                    isSelected={factoryAddresses.has('socialRecovery')}
                     title={data[1].factoryName}
                     description={data[1].factoryDescription}
                   />
                 </Grid>
               </>
-            )}
+            )} */}
           </Grid>
         </Box>
 
@@ -112,7 +125,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             <Grid item xs={12} md={6}>
               <FeatureCard
                 onClick={() => handleSelectFeature('daily_limit')}
-                isSelected={pickedFeatureIDs.has('daily_limit')}
+                isSelected={factoryAddresses.has('daily_limit')}
                 title="Daily Transaction Limit"
                 description="Limit your daily transactions to prevent overshoots"
               />
@@ -120,7 +133,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             <Grid item xs={12} md={6}>
               <FeatureCard
                 onClick={() => handleSelectFeature('2fa')}
-                isSelected={pickedFeatureIDs.has('2fa')}
+                isSelected={factoryAddresses.has('2fa')}
                 title="2FA Auth"
                 description="Secure your wallet with 2FA such as Google Auth or Polygon ID."
               />
@@ -128,7 +141,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             <Grid item xs={12} md={6}>
               <FeatureCard
                 onClick={() => handleSelectFeature('usdt_gas')}
-                isSelected={pickedFeatureIDs.has('usdt_gas')}
+                isSelected={factoryAddresses.has('usdt_gas')}
                 title="USDT Gas"
                 description="Pay your gases using USDT instead of the chain defaults."
               />
@@ -141,7 +154,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
         variant="contained"
         onClick={handleSubmit}
         sx={{ mt: 4 }}
-        disabled={pickedFeatureIDs.size < 1}
+        disabled={factoryAddresses.size < 1}
       >
         Submit
       </Button>
