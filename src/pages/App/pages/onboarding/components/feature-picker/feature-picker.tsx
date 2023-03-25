@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
+  CircularProgress,
   DialogActions,
   Grid,
   Link,
@@ -12,6 +13,7 @@ import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
 import featureConfig from '../../../../../../feature-config.json';
 import useGetAllFactories from '../../../../hooks/factory-aggregator/use-get-all-factories';
+import { red } from '@mui/material/colors';
 
 const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
   const [factoryAddresses, setFactoryAddresses] = useState<Set<string>>(
@@ -42,50 +44,58 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom>
-        Customize your wallet
-      </Typography>
-      <Typography variant="body1" color="text.secondary">
-        Before using your wallet, you have to deploy it with the features you
-        need!
-        <br />
-        Once deployed, your smart contract wallet will be live with the features
-        you desire. Be it transaction limit, extra authentication, the choice is
-        yours!
-        <br />
-      </Typography>
-      <Typography color="text.secondary">
-        If you are a developer & want to build your own feature, learn more{' '}
-        <Link>here</Link>
-      </Typography>
-      <div>
-        <Box
-          sx={{
-            width: '100%',
-            mb: 4,
-          }}
-        >
-          {/* TODO: make this part interactive, depends on logic later */}
-          <Typography align="left" sx={{ mb: 2 }}>
-            Core Features by Wallet X (Verified)
+      {loading && <CircularProgress />}
+      {!loading && error && (
+        <Typography variant="h6" gutterBottom color={red}>
+          Cannot connect to chain!
+        </Typography>
+      )}
+      {!loading && !error && (
+        <>
+          <Typography variant="h3" gutterBottom>
+            Customize your wallet
           </Typography>
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 1, md: 1 }}
-          >
-            {data.map((item) => (
-              <Grid key={item.factoryAddress} item xs={12} md={6}>
-                <FeatureCard
-                  onClick={() => handleSelectFeature(item.factoryAddress)}
-                  isSelected={factoryAddresses.has(item.factoryAddress)}
-                  title={item.factoryName}
-                  description={item.factoryDescription}
-                />
-              </Grid>
-            ))}
+          <Typography variant="body1" color="text.secondary">
+            Before using your wallet, you have to deploy it with the features
+            you need!
+            <br />
+            Once deployed, your smart contract wallet will be live with the
+            features you desire. Be it transaction limit, extra authentication,
+            the choice is yours!
+            <br />
+          </Typography>
+          <Typography color="text.secondary">
+            If you are a developer & want to build your own feature, learn more{' '}
+            <Link>here</Link>
+          </Typography>
+          <div>
+            <Box
+              sx={{
+                width: '100%',
+                mb: 4,
+              }}
+            >
+              {/* TODO: make this part interactive, depends on logic later */}
+              <Typography align="left" sx={{ my: 2, fontWeight: 'bold' }}>
+                Core Features by Wallet X (Verified)
+              </Typography>
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+              >
+                {data.map((item) => (
+                  <Grid key={item.factoryAddress} item xs={12} md={6}>
+                    <FeatureCard
+                      onClick={() => handleSelectFeature(item.factoryAddress)}
+                      isSelected={factoryAddresses.has(item.factoryAddress)}
+                      title={item.factoryName}
+                      description={item.factoryDescription}
+                    />
+                  </Grid>
+                ))}
 
-            {/* {data.length === 2 && (
+                {/* {data.length === 2 && (
               <>
                 <Grid item xs={12} md={6}>
                   <FeatureCard
@@ -105,10 +115,10 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
                 </Grid>
               </>
             )} */}
-          </Grid>
-        </Box>
+              </Grid>
+            </Box>
 
-        {/* <Box
+            {/* <Box
           sx={{
             width: '100%',
           }}
@@ -148,16 +158,18 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             </Grid>
           </Grid>
         </Box> */}
-      </div>
-      <Button
-        fullWidth
-        variant="contained"
-        onClick={handleSubmit}
-        sx={{ mt: 4 }}
-        disabled={factoryAddresses.size < 1}
-      >
-        Submit
-      </Button>
+          </div>
+          <Button
+            fullWidth
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{ mt: 4 }}
+            disabled={factoryAddresses.size < 1}
+          >
+            Submit
+          </Button>
+        </>
+      )}
     </>
   );
 };
