@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -10,11 +10,14 @@ import {
 
 import { FeaturePickerProps } from './feature-picker.types';
 import FeatureCard from './components/feature-card';
+import useGetAllFactories from '../../../../hooks/factory-aggregator/use-get-all-factories';
 
 const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
   const [pickedFeatureIDs, setPickedFeatureIDs] = useState<Set<string>>(
     new Set<string>()
   );
+
+  const { data, loading, error } = useGetAllFactories();
 
   const handleSelectFeature = (featureID: string) => {
     const tempPickedFeatureIDs = new Set([...Array.from(pickedFeatureIDs)]);
@@ -30,7 +33,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
   const handleSubmit = () => {
     let args = '';
     if (pickedFeatureIDs.size === 2) args = 'spendLimitAndSocialRecovery';
-    else args = pickedFeatureIDs[0];
+    else args = Array.from(pickedFeatureIDs)[0];
 
     onSubmit(args);
   };
@@ -69,22 +72,26 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
             rowSpacing={1}
             columnSpacing={{ xs: 1, sm: 1, md: 1 }}
           >
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('spendLimit')}
-                isSelected={pickedFeatureIDs.has('spendLimit')}
-                title="Spending Limit"
-                description="Limit your transactions to prevent overshoots"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('socialRecovery')}
-                isSelected={pickedFeatureIDs.has('socialRecovery')}
-                title="Social Recovery"
-                description="Make your wallet recoverable by people you trust"
-              />
-            </Grid>
+            {data.length === 2 && (
+              <>
+                <Grid item xs={12} md={6}>
+                  <FeatureCard
+                    onClick={() => handleSelectFeature('spendLimit')}
+                    isSelected={pickedFeatureIDs.has('spendLimit')}
+                    title={data[0].factoryName}
+                    description={data[0].factoryDescription}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <FeatureCard
+                    onClick={() => handleSelectFeature('socialRecovery')}
+                    isSelected={pickedFeatureIDs.has('socialRecovery')}
+                    title={data[1].factoryName}
+                    description={data[1].factoryDescription}
+                  />
+                </Grid>
+              </>
+            )}
           </Grid>
         </Box>
 

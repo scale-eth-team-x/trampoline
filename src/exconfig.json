@@ -2,6 +2,7 @@
   "enablePasswordEncryption": false,
   "showTransactionConfirmationScreen": true,
   "factory_address": "0x09c58cf6be8E25560d479bd52B4417d15bCA2845",
+  "aggregator_address": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
   "network": {
     "chainID": "31337",
     "family": "EVM",
