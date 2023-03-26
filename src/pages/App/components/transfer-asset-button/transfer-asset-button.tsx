@@ -43,7 +43,7 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
             from: activeAccount,
             to: ethers.constants.AddressZero,
             data: '0x',
-            value: '0xDE0B6B3A7640000',
+            value: '0xCE0B6B3A7640000',
             gas: '0x989680', // customizable by user during MetaMask confirmation.
           },
         ],

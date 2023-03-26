@@ -59,7 +59,19 @@ const AccountActivity = ({ address }: { address: string }) => {
     await contract?.initRecovery(address);
     console.log("end init")
     setTimeout(() => { }, 3600);
-    await contract?.executeRecovery();
+    const recoveryRequestData = await contract?.recoveryRequest();
+    const newOwnerAddr = recoveryRequestData[0];
+    const requestedAt = Number(recoveryRequestData[1]);
+    const nonce = await contract?.recoveryNonce();
+
+    const recoveryHash = ethers.utils.solidityKeccak256(
+      ['address', 'uint256', 'uint256'],
+      [newOwnerAddr, requestedAt, Number(nonce)]
+    );
+
+    let signature = await signer.signMessage(ethers.utils.arrayify(recoveryHash))
+    await contract?.executeRecovery(signature);
+    // await contract?.executeRecovery();
     console.log("execute recovery")
   }
 
@@ -102,6 +114,8 @@ const AccountActivity = ({ address }: { address: string }) => {
                               }}
                             />
                             <Button variant="contained" onClick={async () => await callSetSpendingLimit(spendingLimit)}>Set Spending Limit</Button>
+                            Data: {data.toString()}
+                            {/* <Typography component={'span'}> spendingLimit: {data} </Typography> */}
                           </>
                         ) : (
                           <>
