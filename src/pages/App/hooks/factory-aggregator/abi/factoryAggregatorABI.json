@@ -1,0 +1,159 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_factoryAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "_factoryName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_factoryDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "_audited",
+        "type": "bool"
+      }
+    ],
+    "name": "addFactory",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "factories",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "factoryAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "string",
+        "name": "factoryName",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "factoryDescription",
+        "type": "string"
+      },
+      {
+        "internalType": "bool",
+        "name": "audited",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "factoryAddresses",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getAllFactories",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "factoryAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "factoryName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "factoryDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "audited",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct FactoryAggregator.FactoryDetails[]",
+        "name": "",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_factoryAddress",
+        "type": "address"
+      }
+    ],
+    "name": "getSingleFactory",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "factoryAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "factoryName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "factoryDescription",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "audited",
+            "type": "bool"
+          }
+        ],
+        "internalType": "struct FactoryAggregator.FactoryDetails",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

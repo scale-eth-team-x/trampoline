@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/walletx-logo.png';
 import { useNavigate } from 'react-router-dom';
 
 const Intro = () => {
@@ -49,16 +49,14 @@ const Intro = () => {
             alignItems="center"
             sx={{ p: 5 }}
           >
-            <img height={250} src={logo} className="App-logo" alt="logo" />
+            <img
+              height={250}
+              src={logo}
+              className="App-logo"
+              alt="logo"
+              style={{ borderRadius: '32px' }}
+            />
           </Box>
-          <Typography
-            textAlign="center"
-            sx={{ fontSize: 14 }}
-            color="text.secondary"
-            gutterBottom
-          >
-            Ethereum Foundation
-          </Typography>
         </CardContent>
         <CardActions sx={{ pl: 4, pr: 4, width: '100%' }}>
           <Stack spacing={2} sx={{ width: '100%' }}>

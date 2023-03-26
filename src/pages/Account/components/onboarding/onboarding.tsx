@@ -6,11 +6,16 @@ import FeaturePicker from '../../../App/pages/onboarding/components/feature-pick
 const Onboarding: OnboardingComponent = ({
   onOnboardingComplete,
 }: OnboardingComponentProps) => {
+  const handleOnboardingComplete = (factoryAddress: string) => {
+    console.log({ factoryAddress });
+    onOnboardingComplete({ factoryAddress });
+  };
+
   return (
     <Box sx={{ padding: 2, overflowY: 'scroll' }}>
       <CardContent>
         {/* Note: to add onsubmit later */}
-        <FeaturePicker onSubmit={() => onOnboardingComplete()} />
+        <FeaturePicker onSubmit={handleOnboardingComplete} />
       </CardContent>
     </Box>
   );

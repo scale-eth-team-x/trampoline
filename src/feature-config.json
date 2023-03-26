@@ -1,0 +1,14 @@
+{
+  "spendLimit": {
+    "address": "0xB45E406505598c8b58Be6DD3283dc0700eA2b745",
+    "factory": "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+  },
+  "socialRecovery": {
+    "address": "0x3247763D96443FBeb4dA94E1f13b68525AC57645",
+    "factory": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+  },
+  "spendLimitAndSocialRecovery": {
+    "address": "0x1925Ad3E3F157ae147A07b5eA636C436B494e4Bd",
+    "factory": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"
+  }
+}

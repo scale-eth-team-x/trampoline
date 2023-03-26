@@ -58,7 +58,7 @@ export default async function showExtensionPopup(
   const popupWidth = 384;
   const popupHeight = 628;
   return browser.windows.create({
-    url: `${browser.runtime.getURL('popup.html')}/#${url}`,
+    url: `${browser.runtime.getURL('popup.html')}#${url}`,
     type: 'popup',
     left: left + width - popupWidth,
     top,
@@ -137,7 +137,7 @@ export function parseSigningData(signingData: string): MessageSigningData {
       // Below, if the signing data is not a valid UTF-8 string, we move on
       // with an undefined possibleMessageString.
       // eslint-disable-next-line no-empty
-    } catch (err) {}
+    } catch (err) { }
 
     // If the hex was parsable as UTF-8 and re-converting to bytes in a hex
     // string produces the identical output, accept it as a valid string and
