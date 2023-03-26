@@ -84,6 +84,51 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
                 rowSpacing={1}
                 columnSpacing={{ xs: 1, sm: 1, md: 1 }}
               >
+                <Grid item xs={12} md={6}>
+                  <FeatureCard
+                    onClick={() =>
+                      handleSelectFeature(featureConfig.spendLimit.factory)
+                    }
+                    isSelected={factoryAddresses.has(
+                      featureConfig.spendLimit.factory
+                    )}
+                    title={'Spend Limit'}
+                    description={
+                      'Limit your spending to prevent overshoots, keep your account safe!'
+                    }
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <FeatureCard
+                    onClick={() =>
+                      handleSelectFeature(featureConfig.socialRecovery.factory)
+                    }
+                    isSelected={factoryAddresses.has(
+                      featureConfig.socialRecovery.factory
+                    )}
+                    title={'Social Recovery'}
+                    description={
+                      'Allow your account to be recovered by the people you trust!'
+                    }
+                  />
+                </Grid>
+              </Grid>
+            </Box>
+
+            <Box
+              sx={{
+                width: '100%',
+              }}
+            >
+              <Typography align="left" sx={{ my: 2, fontWeight: 'bold' }}>
+                Crowdsource contract wallet (on your own risk)
+              </Typography>
+
+              <Grid
+                container
+                rowSpacing={1}
+                columnSpacing={{ xs: 1, sm: 1, md: 1 }}
+              >
                 {data.map((item) => (
                   <Grid key={item.factoryAddress} item xs={12} md={6}>
                     <FeatureCard
@@ -94,70 +139,8 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
                     />
                   </Grid>
                 ))}
-
-                {/* {data.length === 2 && (
-              <>
-                <Grid item xs={12} md={6}>
-                  <FeatureCard
-                    onClick={() => handleSelectFeature('spendLimit')}
-                    isSelected={factoryAddresses.has('spendLimit')}
-                    title={data[0].factoryName}
-                    description={data[0].factoryDescription}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <FeatureCard
-                    onClick={() => handleSelectFeature('socialRecovery')}
-                    isSelected={factoryAddresses.has('socialRecovery')}
-                    title={data[1].factoryName}
-                    description={data[1].factoryDescription}
-                  />
-                </Grid>
-              </>
-            )} */}
               </Grid>
             </Box>
-
-            {/* <Box
-          sx={{
-            width: '100%',
-          }}
-        >
-          <Typography align="left" sx={{ mb: 2 }}>
-            Crowdsource contract wallet (on your own risk)
-          </Typography>
-
-          <Grid
-            container
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 1, md: 1 }}
-          >
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('daily_limit')}
-                isSelected={factoryAddresses.has('daily_limit')}
-                title="Daily Transaction Limit"
-                description="Limit your daily transactions to prevent overshoots"
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('2fa')}
-                isSelected={factoryAddresses.has('2fa')}
-                title="2FA Auth"
-                description="Secure your wallet with 2FA such as Google Auth or Polygon ID."
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FeatureCard
-                onClick={() => handleSelectFeature('usdt_gas')}
-                isSelected={factoryAddresses.has('usdt_gas')}
-                title="USDT Gas"
-                description="Pay your gases using USDT instead of the chain defaults."
-              />
-            </Grid>
-          </Grid>
-        </Box> */}
           </div>
           <Button
             fullWidth
