@@ -8,7 +8,29 @@ import { ethers } from 'ethers';
 const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
   const theme = useTheme();
 
-  const sendMoney = useCallback(async () => {
+  // const sendMoney = useCallback(async () => {
+  //   console.log('did we come here?', window.ethereum);
+  //   if (window.ethereum) {
+  //     const accounts = await window.ethereum.request({
+  //       method: 'eth_requestAccounts',
+  //     });
+  //     const txHash = await window.ethereum.request({
+  //       method: 'eth_sendTransaction',
+  //       params: [
+  //         {
+  //           from: activeAccount,
+  //           to: ethers.constants.AddressZero,
+  //           data: '0x',
+  //           value: '0xDE0B6B3A7640000',
+  //           gas: '0x989680', // customizable by user during MetaMask confirmation.
+  //         },
+  //       ],
+  //     });
+  //     console.log(txHash);
+  //   }
+  // }, [activeAccount]);
+
+  const sendMoney = async () => {
     console.log('did we come here?', window.ethereum);
     if (window.ethereum) {
       const accounts = await window.ethereum.request({
@@ -21,13 +43,14 @@ const TransferAssetButton = ({ activeAccount }: { activeAccount: string }) => {
             from: activeAccount,
             to: ethers.constants.AddressZero,
             data: '0x',
+            value: '0xCE0B6B3A7640000',
+            gas: '0x989680', // customizable by user during MetaMask confirmation.
           },
         ],
       });
       console.log(txHash);
     }
-  }, [activeAccount]);
-
+  }
   return (
     <Stack direction={'row'} spacing={4}>
       <Tooltip title="Coming soon">

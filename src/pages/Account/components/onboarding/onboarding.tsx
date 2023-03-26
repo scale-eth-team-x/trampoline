@@ -6,9 +6,9 @@ import FeaturePicker from '../../../App/pages/onboarding/components/feature-pick
 const Onboarding: OnboardingComponent = ({
   onOnboardingComplete,
 }: OnboardingComponentProps) => {
-  const handleOnboardingComplete = (feature: string) => {
-    console.log({ feature });
-    onOnboardingComplete({ feature });
+  const handleOnboardingComplete = (factoryAddress: string) => {
+    console.log({ factoryAddress });
+    onOnboardingComplete({ factoryAddress });
   };
 
   return (
