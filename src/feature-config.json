@@ -1,14 +1,14 @@
 {
   "spendLimit": {
-    "address": "0xB45E406505598c8b58Be6DD3283dc0700eA2b745",
-    "factory": "0x0165878A594ca255338adfa4d48449f69242Eb8F"
+    "address": "0xC75b17284126Fcf3C21b7dC67c9Fd3e6f0b38676",
+    "factory": "0x976fcd02f7C4773dd89C309fBF55D5923B4c98a1"
   },
   "socialRecovery": {
-    "address": "0x3247763D96443FBeb4dA94E1f13b68525AC57645",
-    "factory": "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"
+    "address": "0x85Fc2A5fF5D052400b1fC908ADcf51f210ee757f",
+    "factory": "0xB0f05d25e41FbC2b52013099ED9616f1206Ae21B"
   },
   "spendLimitAndSocialRecovery": {
-    "address": "0x1925Ad3E3F157ae147A07b5eA636C436B494e4Bd",
-    "factory": "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6"
+    "address": "0xB48cb3b807c6Cf6AF12E7da25353b27089832C34",
+    "factory": "0xD42912755319665397FF090fBB63B1a31aE87Cee"
   }
 }
