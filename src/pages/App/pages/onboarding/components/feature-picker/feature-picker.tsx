@@ -20,7 +20,7 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
     new Set<string>()
   );
 
-  const { data, loading, error } = useGetAllFactories();
+  const { data, loading, error, execute: refetch } = useGetAllFactories();
 
   const handleSelectFeature = (featureID: string) => {
     const tempFactoryAddresses = new Set([...Array.from(factoryAddresses)]);
@@ -40,6 +40,10 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
     else selectedAddress = Array.from(factoryAddresses)[0];
 
     onSubmit(selectedAddress);
+  };
+
+  const handleRefresh = async () => {
+    await refetch();
   };
 
   return (
@@ -121,7 +125,8 @@ const FeaturePicker = ({ onSubmit }: FeaturePickerProps) => {
               }}
             >
               <Typography align="left" sx={{ my: 2, fontWeight: 'bold' }}>
-                Crowdsource contract wallet (on your own risk)
+                Crowdsource contract wallet (on your own risk) (
+                <Link onClick={handleRefresh}>refresh</Link>)
               </Typography>
 
               <Grid

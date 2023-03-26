@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import React from 'react';
-import logo from '../../../../assets/img/logo.svg';
+import logo from '../../../../assets/img/walletx-logo.png';
 import {
   getActiveNetwork,
   getSupportedNetworks,
@@ -46,8 +46,14 @@ const Header = () => {
         sx={{ cursor: 'pointer' }}
         onClick={() => navigate('/')}
       >
-        <img height={30} src={logo} className="App-logo" alt="logo" />
-        <Typography variant="h6">TRAMPOLINE</Typography>
+        <img
+          height={30}
+          src={logo}
+          className="App-logo"
+          alt="logo"
+          style={{ borderRadius: '8px' }}
+        />
+        <Typography variant="h6">WalletX</Typography>
       </Stack>
       <Stack
         direction="row"
