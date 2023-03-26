@@ -1,8 +1,8 @@
-# Trampoline Example
+# WalletX
 
 <img src="src/assets/img/icon-128.png" width="64"/>
 
-Trampoline is a chrome extension boilerplate code to showcase your own Smart Contract Wallets with React 18 and Webpack 5 support.
+WalletX is a customizable wallet that allows users to have personalized wallet. Built on top of the trampoline project.
 
 ## Installation and Running
 
