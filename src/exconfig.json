@@ -2,14 +2,14 @@
   "enablePasswordEncryption": false,
   "showTransactionConfirmationScreen": true,
   "factory_address": "0x09c58cf6be8E25560d479bd52B4417d15bCA2845",
-  "aggregator_address": "0x610178dA211FEF7D417bC0e6FeD39F05609AD788",
+  "aggregator_address": "0x085c2998371C08d6619cAE73bEc0f488cF79d24F",
   "network": {
-    "chainID": "31337",
+    "chainID": "5",
     "family": "EVM",
     "name": "localhost",
-    "provider": "http://127.0.0.1:8545",
+    "provider": "https://goerli.infura.io/v3/bdabe9d2f9244005af0f566398e648da",
     "entryPointAddress": "0x0576a174D229E3cFA37253523E645A78A0C91B57",
-    "bundler": "http://localhost:9000/rpc",
+    "bundler": "https://node.stackup.sh/v1/rpc/0badf99b0962ed5f2f0c59a4c6463d6232a8a1f7895b0e2bf54cb7d9ed4e2358",
     "baseAsset": {
       "symbol": "ETH",
       "name": "ETH",
